@@ -24,9 +24,13 @@ The main objective of this project is:
 
 Technologies Used:
 -> Frontend	: HTML, CSS, JavaScript
+
 ->API:	OpenWeatherMap API
+
 ->Styling :	CSS / Bootstrap
+
 ->Deployment :	Netlify / GitHub Pages
+
 
 Features of the Weather Application:
 
@@ -73,6 +77,7 @@ The API provides real-time weather data in JSON format.
 
 Example API Request
 fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=YOUR_API_KEY&units=metric`)
+
 Example JSON Response
 {
   "name": "Hyderabad",
