@@ -23,6 +23,7 @@ The main objective of this project is:
 --To understand real-time data handling in web development
 
 Technologies Used:
+
 -> Frontend	: HTML, CSS, JavaScript
 
 ->API:	OpenWeatherMap API
@@ -62,14 +63,19 @@ Working Process of the Project:
 
 "Step-by-Step Workflow"
 User enters city name
+
           ↓
 Frontend sends API request
+
           ↓
 Weather API returns JSON data
+
           ↓
 JavaScript processes data
+
           ↓
 Weather details displayed on screen
+
 
 API Used:
 OpenWeatherMap API
