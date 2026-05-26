@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Application</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+        }
+
+        .container{
+            width:350px;
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            text-align:center;
+            box-shadow:0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        h1{
+            margin-bottom:20px;
+            color:#333;
+        }
+
+        .search-box{
+            display:flex;
+            gap:10px;
+            margin-bottom:20px;
+        }
+
+        input{
+            flex:1;
+            padding:10px;
+            border:1px solid #ccc;
+            border-radius:8px;
+            outline:none;
+            font-size:16px;
+        }
+
+        button{
+            padding:10px 15px;
+            border:none;
+            background:#007BFF;
+            color:white;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        button:hover{
+            background:#0056b3;
+        }
+
+        .weather-info{
+            margin-top:20px;
+        }
+
+        .weather-info h2{
+            margin-bottom:10px;
+            color:#444;
+        }
+
+        .weather-info p{
+            margin:8px 0;
+            font-size:18px;
+            color:#555;
+        }
+
+        .error{
+            color:red;
+            margin-top:10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Weather App</h1>
+
+        <div class="search-box">
+            <input type="text" id="cityInput" placeholder="Enter city name">
+            <button onclick="getWeather()">Search</button>
+        </div>
+
+        <div class="weather-info" id="weatherInfo">
+            <h2 id="cityName"></h2>
+            <p id="temperature"></p>
+            <p id="humidity"></p>
+            <p id="wind"></p>
+            <p id="condition"></p>
+        </div>
+
+        <p class="error" id="error"></p>
+    </div>
+
+    <script>
+
+        const apiKey = "b60338ffa6239291932be3f49a56beb5";
+
+        async function getWeather() {
+
+            const city = document.getElementById("cityInput").value;
+
+            if(city === ""){
+                document.getElementById("error").innerText = "Please enter a city name";
+                return;
+            }
+
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+            try{
+
+                const response = await fetch(url);
+
+                if(!response.ok){
+                    throw new Error("City not found");
+                }
+
+                const data = await response.json();
+
+                document.getElementById("cityName").innerText =
+                    data.name + ", " + data.sys.country;
+
+                document.getElementById("temperature").innerText =
+                    "Temperature: " + data.main.temp + " °C";
+
+                document.getElementById("humidity").innerText =
+                    "Humidity: " + data.main.humidity + "%";
+
+                document.getElementById("wind").innerText =
+                    "Wind Speed: " + data.wind.speed + " km/h";
+
+                document.getElementById("condition").innerText =
+                    "Condition: " + data.weather[0].main;
+
+                document.getElementById("error").innerText = "";
+
+            }
+            catch(error){
+                document.getElementById("error").innerText = error.message;
+
+                document.getElementById("cityName").innerText = "";
+                document.getElementById("temperature").innerText = "";
+                document.getElementById("humidity").innerText = "";
+                document.getElementById("wind").innerText = "";
+                document.getElementById("condition").innerText = "";
+            }
+        }
+
+    </script>
+
+</body>
+</html>
