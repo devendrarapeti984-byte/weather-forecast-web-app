@@ -126,16 +126,14 @@ Dynamic updates
 Sample Functionalities
 Search Weather
 
-async function getWeather(city) {
-    const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
-    const data = await response.json();
-
-    document.querySelector(".temp").innerHTML = data.main.temp + "°C";
-}
 
 Challenges Faced:
 
 Handling invalid city names
+
 Managing asynchronous API calls
+
 Designing responsive UI
+
 Parsing JSON data
+
